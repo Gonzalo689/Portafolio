@@ -35,7 +35,7 @@ document.getElementById('eventosEmerita').addEventListener('click', function() {
 });
 
 document.getElementById('portafolioLink').addEventListener('click', function() {
-    window.open('https://github.com/Gonzalo689/', '_blank');
+    window.open('https://github.com/Gonzalo689/Portafolio', '_blank');
 });
 
 
