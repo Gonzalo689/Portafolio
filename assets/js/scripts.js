@@ -1,3 +1,6 @@
+http = "https://0p1x36b4-3000.uks1.devtunnels.ms/"
+// http = "http://localhost:3000/"
+
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("contactForm");
     if (!form) {
@@ -12,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch("http://localhost:3000/send", {
+            const response = await fetch(http + "send", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
             alert(result);
         } catch (error) {
             console.error("Error al enviar el mensaje:", error);
-            alert("Hubo un problema al enviar el mensaje.");
+            alert("No se pudo enviar el mensaje. Inténtelo de nuevo más tarde.");
         }
     });
 });

@@ -11,6 +11,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Configurar nodemailer
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
