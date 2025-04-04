@@ -37,22 +37,6 @@ app.post("/send", (req, res) => {
   });
 });
 
-app.get('/vf-config', (req, res) => {
-  const { VF_PROJECT_ID, VF_URL, VF_VERSION_ID, VF_VOICE_URL } = process.env;
-
-  if (!VF_PROJECT_ID || !VF_URL || !VF_VERSION_ID || !VF_VOICE_URL) {
-    return res.status(500).json({ error: "Faltan variables de configuración de Voiceflow" });
-  }
-
-  const VF_CONFIG = {
-    projectID: VF_PROJECT_ID,
-    url: VF_URL,
-    versionID: VF_VERSION_ID,
-    voiceURL: VF_VOICE_URL
-  };
-
-  res.json(VF_CONFIG); // Enviar la configuración como respuesta JSON
-});
 
 // Servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname, "assets")));
