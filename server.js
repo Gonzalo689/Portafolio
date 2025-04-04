@@ -11,12 +11,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const VF_CONFIG = {
-  projectID: process.env.VF_PROJECT_ID,
-  url: process.env.VF_URL,
-  versionID: process.env.VF_VERSION_ID,
-  voiceURL: process.env.VF_VOICE_URL
-};
 
 // Configurar nodemailer
 const transporter = nodemailer.createTransport({
@@ -44,16 +38,21 @@ app.post("/send", (req, res) => {
 });
 
 app.get('/vf-config', (req, res) => {
+  const { VF_PROJECT_ID, VF_URL, VF_VERSION_ID, VF_VOICE_URL } = process.env;
+
+  if (!VF_PROJECT_ID || !VF_URL || !VF_VERSION_ID || !VF_VOICE_URL) {
+    return res.status(500).json({ error: "Faltan variables de configuración de Voiceflow" });
+  }
+
   const VF_CONFIG = {
-    projectID: process.env.VF_PROJECT_ID,
-    url: process.env.VF_URL,
-    versionID: process.env.VF_VERSION_ID,
-    voiceURL: process.env.VF_VOICE_URL
+    projectID: VF_PROJECT_ID,
+    url: VF_URL,
+    versionID: VF_VERSION_ID,
+    voiceURL: VF_VOICE_URL
   };
 
   res.json(VF_CONFIG); // Enviar la configuración como respuesta JSON
 });
-
 
 // Servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname, "assets")));
