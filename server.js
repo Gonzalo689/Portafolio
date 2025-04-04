@@ -11,6 +11,13 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const VF_CONFIG = {
+  projectID: process.env.VF_PROJECT_ID,
+  url: process.env.VF_URL,
+  versionID: process.env.VF_VERSION_ID,
+  voiceURL: process.env.VF_VOICE_URL
+};
+
 // Configurar nodemailer
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -34,6 +41,17 @@ app.post("/send", (req, res) => {
     if (error) return res.status(500).send(error.toString());
     res.send("Mensaje enviado correctamente.");
   });
+});
+
+app.get('/vf-config', (req, res) => {
+  const VF_CONFIG = {
+    projectID: process.env.VF_PROJECT_ID,
+    url: process.env.VF_URL,
+    versionID: process.env.VF_VERSION_ID,
+    voiceURL: process.env.VF_VOICE_URL
+  };
+
+  res.json(VF_CONFIG); // Enviar la configuración como respuesta JSON
 });
 
 
